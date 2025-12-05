@@ -24,7 +24,7 @@ run_logged $OMARCHY_INSTALL/config/hardware/bluetooth.sh
 run_logged $OMARCHY_INSTALL/config/hardware/printer.sh
 run_logged $OMARCHY_INSTALL/config/hardware/usb-autosuspend.sh
 run_logged $OMARCHY_INSTALL/config/hardware/ignore-power-button.sh
-run_logged $OMARCHY_INSTALL/config/hardware/nvidia.sh
+source $OMARCHY_INSTALL/config/hardware/omarch-me-nvidia.sh
 run_logged $OMARCHY_INSTALL/config/hardware/fix-f13-amd-audio-input.sh
 run_logged $OMARCHY_INSTALL/config/hardware/fix-bcm43xx.sh
 run_logged $OMARCHY_INSTALL/config/hardware/fix-apple-spi-keyboard.sh
