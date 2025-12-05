@@ -15,7 +15,7 @@ if [ -n "$(lspci | grep -i 'nvidia')" ]; then
   echo 'If you know more about Nvidia on Linux than I do, and would like to add options for Nouveau, please contribute to this script on GitHub!: https://github.com/SerrpentDagger/omarch-me/blob/master/install/config/hardware/nvidia.sh'
   pause_log
   if ! gum confirm 'Proceed with Nvidia driver installation and configuration?'; then
-    exit
+    exit 0
   fi
   unpause_log
   # --- Driver Selection ---

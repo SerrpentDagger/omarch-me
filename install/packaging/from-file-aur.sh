@@ -5,7 +5,7 @@ fi
 
 if [[ -f "$OMARCHY_INSTALL/$1" ]]; then
   # Fetch all in file
-  mapfile -t packages < <(grep -v '^#' "$OMARCHY_INSTALL/$1" | grep -v '^$')
+  mapfile -t packages < <(grep -v '^#' "$OMARCHY_INSTALL/$1" | grep -v '^$' || true)
   if [[ ${#packages[@]} -ne 0 ]]; then
     # Install all of them
     yay -Sua --noconfirm "${packages[@]}"
