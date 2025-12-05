@@ -1,12 +1,41 @@
 if [[ $# -lt 2 ]]; then
   echo "Must specify selection file and kind of thing!"
-  exit
+  exit 1
 fi
+
+is_aur_package() {
+  local package_name=$1
+  # Check if in aur list
+  if grep -q "^$package_name\$" "$OMARCHY_INSTALL/omarch-me-aur.packages"; then
+    return 0
+  else
+    return 1
+  fi
+}
+# Have to export functions for fzf
+export -f is_aur_package
+
+get_package_info() {
+  local package_name=$1
+  if is_aur_package "$package_name"; then
+    yay -Siia "$package_name" || echo "Failed to get info for $package_name"
+  else
+    pacman -Sii "$package_name" || echo "Failed to get info for $package_name"
+  fi
+}
+# Have to export functions for fzf
+export -f get_package_info
+
+filter_user_selected_aur() {
+  for package in "$@"; do
+    is_aur_package "$package" && echo "$package" >> "$OMARCHY_INSTALL/user-selected-aur.packages" || echo "$package" >> "$OMARCHY_INSTALL/user-selected.packages"
+  done
+}
 
 fzf_args=(
   --multi
   --header="Select which $2 packages to install."
-  --preview 'pacman -Sii {1}' #'echo Preview for {1}!' 
+  --preview 'get_package_info {1}' 
   --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select, escape: none of them'
   --preview-label-pos='bottom'
   --preview-window 'down:65%:wrap'
@@ -16,13 +45,5 @@ fzf_args=(
   --color 'pointer:green,marker:green'
 )
 
-pkg_names=$(grep -v '^#' "$OMARCHY_INSTALL/$1" | grep -v '^$' | fzf "${fzf_args[@]}")
-
-if [[ -n "$pkg_names" ]]; then # If nonempty selection.
-  # Convert newline-separated selections to space-separated for yay
-  echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -S --noconfirm --needed
-#  echo 'Selected following from file:'
-#  echo "$pkg_names"
-#else
-#  echo 'No package selected! :'"'"'('
-fi
+pkg_names=$(grep -v '^#' "$OMARCHY_INSTALL/$1" | grep -v '^$' | fzf "${fzf_args[@]}" || true)
+filter_user_selected_aur $pkg_names
