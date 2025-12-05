@@ -20,9 +20,9 @@ run_logged $OMARCHY_INSTALL/packaging/icons.sh
 
 pause_log
 if gum confirm 'Install all default Omarchy webapps? (Can be easily added/removed later in Omarchy menu)'; then
-  unpause_log 'Installing webapps, TUIs and configs'
+  unpause_log 'Installing webapps, TUIs and configs...'
   run_logged $OMARCHY_INSTALL/packaging/webapps.sh
 else
-  unpause_log 'Installing TUIs and configs'
+  unpause_log 'Installing TUIs and configs...'
 fi
 run_logged $OMARCHY_INSTALL/packaging/tuis.sh
