@@ -17,3 +17,6 @@ omarchy-chromium
 
 # Theming
 aether
+
+# Alternative (better!) compositor
+niri
