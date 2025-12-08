@@ -59,6 +59,7 @@ luarocks
 mako
 man-db
 mariadb-libs
+mise
 nautilus
 nvim
 omarchy-nvim
