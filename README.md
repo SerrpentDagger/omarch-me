@@ -15,14 +15,21 @@ Depending on installation choices, certain configuration scripts may be skipped.
 
 From there, you can enjoy your customised Omarchy setup without the artefacts of unwanted apps!
 
+## Niri (Testing)
+Niri for Omarchy is currently a functional feature in the `testing` branch. I expect to have it in the Omarch-me `master` branch within a day or two.
+
+To use Niri on Omarchy, simply select `niri` from the *Extra System* packages during customised install. The installer will then detect its presence and react accordingly. Themes, menus and keybinds included!
+
 ## Installation
 Installation of Omarch-me takes the form of a [manual Omarchy install](https://learn.omacom.io/2/the-omarchy-manual/96/manual-installation) using a different `curl` install script after Arch. In partular...
 
-Once Arch has been installed, pick reboot, login with the user you just setup, and now you can install Omarch-me by running
+Once Arch has been installed, pick reboot, login with the user you just set up, and now you can install Omarch-me by running
 
 `curl -fsSL https://serpentdagger.com/omarch-me/install | bash`.
 
 Then follow the prompts as you wish.
+
+(To install from the `testing` branch instead of `master` you can curl `install-testing` instead of `install` in the above command.)
 
 ### Running the command:
 ![curl install image](https://serpentdagger.com/assets/images/content/om-curl-command.png)
