@@ -344,12 +344,45 @@ window-rule {
     // block-out-from "screencast"
 }
 
+// Example: Open localsend as a sharey floating window.
+window-rule {
+  match app-id="localsend"
+
+  open-floating true
+  default-column-width { proportion 0.3; }
+  default-window-height { proportion 0.7; }
+}
+
+// Big floating for omarchy TUIs.
+window-rule {
+  match app-id="org.omarchy.terminal"
+
+  open-floating true
+  default-column-width { proportion 0.75; }
+  default-window-height { proportion 0.8; }
+}
+
+window-rule {
+    // Windows to open maximised. Add as desired.
+    // Run "niri msg windows" to get a list of window identities.
+    match app-id="gimp"
+    // match app-id="another-app-id" // Add a line like this for another app.
+
+    open-maximized true
+}
+
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
     geometry-corner-radius 5
     clip-to-geometry true
-    opacity 0.87
+}
+
+window-rule {
+  // Windows not to be translucent. Add as desired.
+  exclude app-id="gimp"
+
+  opacity 0.87
 }
 
 window-rule {
@@ -382,6 +415,7 @@ binds {
     Super+Shift+N hotkey-overlay-title="Editor" { spawn "omarchy-launch-editor"; }
     Super+Shift+T hotkey-overlay-title="Activity Monitor" { spawn-sh "omarchy-launch-tui btop"; }
     
+    Super+Space hotkey-overlay-title="App Launcher" { spawn "omarchy-launch-walker"; }
     Super+Alt+Space hotkey-overlay-title="Omarchy Menu" { spawn "omarchy-menu"; }
     
     // Utility bindings from Omarchy
