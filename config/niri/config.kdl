@@ -174,13 +174,14 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
+        // The theme comment below uses Autotheme to replace the hash code with a color from the currently active Omarchy theme.
+        active-color "#8caaee" //THEME:hi_fg
 
         // Color of the ring on inactive monitors.
         //
         // The focus ring only draws around the active window, so the only place
         // where you can see its inactive-color is on other monitors.
-        inactive-color "#505050"
+        inactive-color "#838ba7" //THEME:inactive_fg
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -205,11 +206,11 @@ layout {
         off
 
         width 2
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        active-color "#8caaee" //THEME:hi_fg
+        inactive-color "#838ba7" //THEME:inactive_fg
 
         // Color of the border around windows that request your attention.
-        urgent-color "#9b0000"
+        urgent-color "#8caaee" //THEME:selected_fg
 
         // Gradients can use a few different interpolation color spaces.
         // For example, this is a pastel rainbow gradient via in="oklch longer hue".
@@ -222,7 +223,7 @@ layout {
     // You can enable drop shadows for windows.
     shadow {
         // Uncomment the next line to enable shadows.
-        // on
+        on
 
         // By default, the shadow draws only around its window, and not behind it.
         // Uncomment this setting to make the shadow draw behind its window.
@@ -253,7 +254,7 @@ layout {
         offset x=0 y=5
 
         // You can also change the shadow color and opacity.
-        color "#0007"
+        color "#838ba7" //THEME:inactive_fg
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
