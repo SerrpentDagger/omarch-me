@@ -15,10 +15,27 @@ Depending on installation choices, certain configuration scripts may be skipped.
 
 From there, you can enjoy your customised Omarchy setup without the artefacts of unwanted apps!
 
-## Niri (Testing)
-Niri for Omarchy is currently a functional feature in the `testing` branch. I expect to have it in the Omarch-me `master` branch within a day or two.
+## Niri
+Niri for Omarchy is now a functional feature in the `master` branch. Note that certain scripts and features specific to Hyprland haven't yet been updated for Niri. What *is* notably working:
+
+- `uwsm`, autologin
+- Background with `swaybg`
+- Theme integration compatible with even user-submitted themes (see `autotheme.py`)
+- Most Omarchy keybinds as expected
+- Waybar with Niri workspaces module
+- Lock screen
+
+What *isn't* working:
+
+- Hyprsunset nightlight
+- Screensaver
+- Certain menu entries still point to Hyprland configs
+- `Trigger->Screenshot` doesn't use Niri screenshot tool
+- Screen record
 
 To use Niri on Omarchy, simply select `niri` from the *Extra System* packages during customised install. The installer will then detect its presence and react accordingly. Themes, menus and keybinds included!
+
+Note that Hyprland is still installed alongside Niri, and you can switch back to it later by changing the session entry in `/etc/sddm.conf.d/autologin.conf` from `niri-uwsm` to `hyprland-uwsm`. You will then be logged in to the Hyprland session upon next restart. I expect to provide this as a menu entry later.
 
 ## Installation
 Installation of Omarch-me takes the form of a [manual Omarchy install](https://learn.omacom.io/2/the-omarchy-manual/96/manual-installation) using a different `curl` install script after Arch. In partular...
