@@ -2,6 +2,38 @@
 
 export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 
+if pgrep -x niri > /dev/null; then
+  is_niri=true
+  comp_display='󰗢  Niri\n'
+  key_config="$HOME/.config/niri/config.kdl"
+  lnf_config="$key_config"
+  input_config="$key_config"
+  learn_link='https://yalter.github.io/niri/'
+  learn_keys='niri msg action show-hotkey-overlay'
+  capture_screenshot='niri msg action screenshot'
+  case_match='Niri'
+  monitor_config="$key_config"
+  comp_config="$key_config"
+  hyprsunset_display=''
+  screensaver_display=''
+  nightlight_display=''
+else
+  is_niri=false
+  comp_display='  Hyprland\n'
+  key_config="$HOME/.config/hypr/bindings.conf"
+  lnf_config="$HOME/.config/hypr/looknfeel.conf"
+  input_config='~/.config/hypr/input.conf'
+  monitor_config='~/.config/hypr/monitors.conf'
+  comp_config='~/.config/hypr/hyprland.conf'
+  learn_link='https://wiki.hypr.land/'
+  learn_keys='omarchy-menu-keybindings'
+  capture_screenshot='show_screenshot_menu'
+  case_match='Niri'
+  hyprsunset_display='  Hyprsunset\n'
+  screensaver_display='󱄄  Screensaver\n'
+  nightlight_display='󰔎  Nightlight\n'
+fi
+
 # Set to true when going directly to a submenu, so we can exit directly
 BACK_TO_EXIT=false
 
@@ -74,10 +106,10 @@ aur_install_and_launch() {
 }
 
 show_learn_menu() {
-  case $(menu "Learn" "  Keybindings\n  Omarchy\n  Hyprland\n󰣇  Arch\n  Neovim\n󱆃  Bash") in
-  *Keybindings*) omarchy-menu-keybindings ;;
+  case $(menu "Learn" "  Keybindings\n  Omarchy\n$comp_display󰣇  Arch\n  Neovim\n󱆃  Bash") in
+  *Keybindings*) eval "$learn_keys" ;;
   *Omarchy*) omarchy-launch-webapp "https://learn.omacom.io/2/the-omarchy-manual" ;;
-  *Hyprland*) omarchy-launch-webapp "https://wiki.hypr.land/" ;;
+  *"$case_match"*) omarchy-launch-webapp "$learn_link" ;;
   *Arch*) omarchy-launch-webapp "https://wiki.archlinux.org/title/Main_page" ;;
   *Bash*) omarchy-launch-webapp "https://devhints.io/bash" ;;
   *Neovim*) omarchy-launch-webapp "https://www.lazyvim.org/keymaps" ;;
@@ -96,7 +128,7 @@ show_trigger_menu() {
 
 show_capture_menu() {
   case $(menu "Capture" "  Screenshot\n  Screenrecord\n󰃉  Color") in
-  *Screenshot*) show_screenshot_menu ;;
+  *Screenshot*) eval "$capture_screenshot" ;;
   *Screenrecord*) show_screenrecord_menu ;;
   *Color*) pkill hyprpicker || hyprpicker -a ;;
   *) show_trigger_menu ;;
@@ -132,7 +164,7 @@ show_share_menu() {
 }
 
 show_toggle_menu() {
-  case $(menu "Toggle" "󱄄  Screensaver\n󰔎  Nightlight\n󱫖  Idle Lock\n󰍜  Top Bar") in
+  case $(menu "Toggle" "$screensaver_display$nightlight_display󱫖  Idle Lock\n󰍜  Top Bar") in
   *Screensaver*) omarchy-toggle-screensaver ;;
   *Nightlight*) omarchy-toggle-nightlight ;;
   *Idle*) omarchy-toggle-idle ;;
@@ -142,11 +174,11 @@ show_toggle_menu() {
 }
 
 show_style_menu() {
-  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n  Hyprland\n󱄄  Screensaver\n  About") in
+  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n$comp_display$screensaver_display\n  About") in
   *Theme*) show_theme_menu ;;
   *Font*) show_font_menu ;;
   *Background*) omarchy-theme-bg-next ;;
-  *Hyprland*) open_in_editor ~/.config/hypr/looknfeel.conf ;;
+  *"$case_match"*) open_in_editor "$lnf_config" ;;
   *Screensaver*) open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
   *About*) open_in_editor ~/.config/omarchy/branding/about.txt ;;
   *) show_main_menu ;;
@@ -168,8 +200,8 @@ show_font_menu() {
 
 show_setup_menu() {
   local options="  Audio\n  Wifi\n󰂯  Bluetooth\n󱐋  Power Profile\n󰍹  Monitors"
-  [ -f ~/.config/hypr/bindings.conf ] && options="$options\n  Keybindings"
-  [ -f ~/.config/hypr/input.conf ] && options="$options\n  Input"
+  [ -f "$key_config" ] && options="$options\n  Keybindings"
+  [ -f "$input_config" ] && options="$options\n  Input"
   options="$options\n  Defaults\n󰱔  DNS\n  Security\n  Config"
 
   case $(menu "Setup" "$options") in
@@ -177,9 +209,9 @@ show_setup_menu() {
   *Wifi*) omarchy-launch-wifi ;;
   *Bluetooth*) omarchy-launch-bluetooth ;;
   *Power*) show_setup_power_menu ;;
-  *Monitors*) open_in_editor ~/.config/hypr/monitors.conf ;;
-  *Keybindings*) open_in_editor ~/.config/hypr/bindings.conf ;;
-  *Input*) open_in_editor ~/.config/hypr/input.conf ;;
+  *Monitors*) open_in_editor "$monitor_config" ;;
+  *Keybindings*) open_in_editor "$key_config" ;;
+  *Input*) open_in_editor "$input_config" ;;
   *Defaults*) open_in_editor ~/.config/uwsm/default ;;
   *DNS*) present_terminal omarchy-setup-dns ;;
   *Security*) show_setup_security_menu ;;
@@ -199,8 +231,8 @@ show_setup_power_menu() {
 }
 
 show_setup_config_menu() {
-  case $(menu "Setup" "  Hyprland\n  Hypridle\n  Hyprlock\n  Hyprsunset\n  Swayosd\n󰌧  Walker\n󰍜  Waybar\n󰞅  XCompose") in
-  *Hyprland*) open_in_editor ~/.config/hypr/hyprland.conf ;;
+  case $(menu "Setup" "$comp_display  Hypridle\n  Hyprlock\n$hyprsunset_display  Swayosd\n󰌧  Walker\n󰍜  Waybar\n󰞅  XCompose") in
+  *"$case_match"*) open_in_editor "$comp_config" ;;
   *Hypridle*) open_in_editor ~/.config/hypr/hypridle.conf && omarchy-restart-hypridle ;;
   *Hyprlock*) open_in_editor ~/.config/hypr/hyprlock.conf ;;
   *Hyprsunset*) open_in_editor ~/.config/hypr/hyprsunset.conf && omarchy-restart-hyprsunset ;;
@@ -434,7 +466,7 @@ show_update_password_menu() {
 }
 
 show_system_menu() {
-  case $(menu "System" "  Lock\n󱄄  Screensaver\n󰤄  Suspend\n󰜉  Restart\n󰐥  Shutdown") in
+  case $(menu "System" "  Lock\n$screensaver_display󰤄  Suspend\n󰜉  Restart\n󰐥  Shutdown") in
   *Lock*) omarchy-lock-screen ;;
   *Screensaver*) omarchy-launch-screensaver force ;;
   *Suspend*) systemctl suspend ;;

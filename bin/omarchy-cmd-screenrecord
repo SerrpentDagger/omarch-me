@@ -30,7 +30,11 @@ start_webcam_overlay() {
   cleanup_webcam
 
   # Get monitor scale
-  local scale=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .scale')
+  if pgrep -x niri > /dev/null; then
+    local scale=$(niri msg focused-output | grep -oP 'Scale:\s*\K[0-9]+(\.[0-9]+)?')
+  else
+    local scale=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .scale')
+  fi
 
   # Target width (base 360px, scaled to monitor)
   local target_width=$(awk "BEGIN {printf \"%.0f\", 360 * $scale}")
