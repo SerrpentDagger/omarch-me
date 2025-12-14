@@ -17,3 +17,9 @@ omarchy-chromium
 
 # Theming
 aether
+
+# Versatile and cool gpu monitor
+nvtop
+
+# Alternative (better!) compositor, automatically configured.
+niri
