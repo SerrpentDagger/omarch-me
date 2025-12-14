@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Add the requisite niri desktop entry for sddm,
+# using uwsm for compatibility with Omarchy scripts/pattern.
+if [ ! -f /usr/share/wayland-sessions/niri-uwsm.desktop ]; then
+  cat <<EOF | sudo tee /usr/share/wayland-sessions/niri-uwsm.desktop
+[Desktop Entry]
+Name=Niri (uwsm-managed)
+Comment=A scrollable-tiling Wayland compositor
+Exec=uwsm start -- niri-session
+TryExec=uwsm
+Type=Application
+DesktopNames=niri
+EOF
+fi

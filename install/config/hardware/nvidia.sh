@@ -10,12 +10,6 @@
 
 # --- GPU Detection ---
 if [ -n "$(lspci | grep -i 'nvidia')" ]; then
-  echo 'IMPORTANT: Nvidia card detected. Recommended automatic configuration will install some proprietary Nvidia software (nvidia-utils, lib32-nvidia-utils), even if your card IS supported by the recent nvidia-open-dkms driver.'
-  echo 'If you skip this step, you'"'"'ll be missing some optimisations and configurations for your card for Hyperland, and your card probably won'"'"'t be doing much until you manually install a driver yourself. :('
-  echo 'If you know more about Nvidia on Linux than I do, and would like to add options for Nouveau, please contribute to this script on GitHub!: https://github.com/SerrpentDagger/omarch-me/blob/master/install/config/hardware/nvidia.sh'
-  if ! gum confirm 'Proceed with Nvidia driver installation and configuration?'; then
-    exit
-  fi
   # --- Driver Selection ---
   # Turing (16xx, 20xx), Ampere (30xx), Ada (40xx), and newer recommend the open-source kernel modules
   if echo "$(lspci | grep -i 'nvidia')" | grep -q -E "RTX [2-9][0-9]|GTX 16"; then
@@ -23,7 +17,7 @@ if [ -n "$(lspci | grep -i 'nvidia')" ]; then
   else
     NVIDIA_DRIVER_PACKAGE="nvidia-dkms"
   fi
-  echo "Your primary driver package: $NVIDIA_DRIVER_PACKAGE"
+  echo "Your primary driver package: $NVIDIA_DRIVER_PACKAGE" # SD: let the user know what package they're getting (if it's at least open-source-ish or not).
   sleep 0.8
 
   # Check which kernel is installed and set appropriate headers package

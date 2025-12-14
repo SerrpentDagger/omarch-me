@@ -4,22 +4,22 @@
 # Passwords
 keepassxc
 
-# Terminals
-ghostty
-
 # Calculators
 libqalculate
 
 # Doc viewers
 evince
 
-# Text editor
-nvim
-omarchy-nvim # requires extra setup to install later (omarchy-nvim-setup)
-
 # Browsers
-#mullvad
+#mullvad-browser
+#brave
 omarchy-chromium
 
 # Theming
 aether
+
+# Versatile and cool gpu monitor
+nvtop
+
+# Alternative (better!) compositor, automatically configured.
+niri

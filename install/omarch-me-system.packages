@@ -25,6 +25,7 @@ fd
 ffmpegthumbnailer
 fontconfig
 fzf
+ghostty
 github-cli
 gnome-calculator
 gnome-keyring
@@ -58,7 +59,10 @@ luarocks
 mako
 man-db
 mariadb-libs
+mise
 nautilus
+nvim
+omarchy-nvim
 gnome-disk-utility
 noto-fonts
 noto-fonts-cjk

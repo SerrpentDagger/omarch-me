@@ -1,0 +1,22 @@
+#!/bin/bash
+
+CURRENT_THEME_DIR="$HOME/.config/omarchy/current/theme"
+PYTHON_DIR="$OMARCHY_PATH/python"
+CONFIG="$HOME/.config/autotheme/targets.cfg"
+
+if [[ -f $CONFIG ]]; then
+  # Fetch all in file
+  mapfile -t targets < <(grep -v '^#' "$CONFIG" | grep -v '^$' || true)
+  if [[ ${#targets[@]} -ne 0 ]]; then
+    for file in "${targets[@]}"; do
+      expanded_file=$(eval "echo \"$file\"")
+      if [[ -f "$expanded_file" ]]; then
+        python3 $PYTHON_DIR/autotheme.py $CURRENT_THEME_DIR/btop.theme $expanded_file
+      else
+        echo "Target file $expanded_file did not exist."
+      fi
+    done
+  fi
+else
+  echo "Missing autotheme config file: $CONFIG"
+fi

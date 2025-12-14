@@ -1,10 +1,17 @@
 sudo mkdir -p /etc/sddm.conf.d
 
+if niri --version &> /dev/null; then
+  compositor='niri-uwsm'
+  omarch-me-niri-add-session
+else
+  compositor='hyprland-uwsm'
+fi
+
 if [ ! -f /etc/sddm.conf.d/autologin.conf ]; then
   cat <<EOF | sudo tee /etc/sddm.conf.d/autologin.conf
 [Autologin]
 User=$USER
-Session=hyprland-uwsm
+Session=$compositor
 
 [Theme]
 Current=breeze
