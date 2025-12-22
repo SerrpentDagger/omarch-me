@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if ! pgrep -x hypridle >/dev/null; then
+  uwsm-app -- hypridle >/dev/null 2>&1 &
+  notify-send "Now locking computer when idle"
+fi
