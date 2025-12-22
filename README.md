@@ -2,7 +2,7 @@
 Omarch-me is a fork of [Omarchy](https://omarchy.org) by DHH: "a beautiful, modern & opinionated Linux distribution". This fork makes minor modifications to the install scripts that prioritise open-source apps and allow you to choose yourself which default apps to install with the OS.
 
 ## The Changes
-Omarch-me is exactly the same as Omarchy after the initial installation. During install, however, the user will be asked if they want all the default Omarchy apps (`Yes` or `Customise`), webbaps (`Yes` or `No`), and potentially the proprietary Nvidia drivers if applicable (`Yes` or `No`).
+Omarch-me is basically the same as Omarchy after the initial installation. During install, however, the user will be asked if they want all the default Omarchy apps (`Yes` or `Customise`), webbaps (`Yes` or `No`), and potentially the proprietary Nvidia drivers if applicable (`Yes` or `No`).
 
 If the user chooses `Customise`, only basic system apps will be automatically installed (terminal tools, hardware compatibility, system functionality; all open-source). The user then chooses extra apps to install (including Omarchy configurations) from several small lists:
 
@@ -22,16 +22,17 @@ Niri for Omarchy is now a functional feature in the `master` branch. Note that c
 - Background with `swaybg`
 - Theme integration compatible with even user-submitted themes (see `autotheme.py`)
 - Most Omarchy keybinds as expected
+- Omarchy menu adapts automatically to the active compositor
 - Waybar with Niri workspaces module
 - Lock screen
+- `Trigger->Screenshot` uses Niri screenshot tool
+- `hyprpicker` color picker
+- Screen record can get webcam scale from Niri
 
 What *isn't* working:
 
-- Hyprsunset nightlight
+- Hyprsunset nightlight (try `sunsetr` from AUR?)
 - Screensaver
-- Certain menu entries still point to Hyprland configs
-- `Trigger->Screenshot` doesn't use Niri screenshot tool
-- Screen record
 
 To use Niri on Omarchy, simply select `niri` from the *Extra System* packages during customised install. The installer will then detect its presence and react accordingly. Themes, menus and keybinds included!
 
