@@ -9,9 +9,13 @@ gtk-update-icon-cache ~/.local/share/icons/hicolor &>/dev/null
 mkdir -p ~/.local/share/applications
 cp ~/.local/share/omarchy/applications/*.desktop ~/.local/share/applications/
 cp ~/.local/share/omarchy/applications/hidden/*.desktop ~/.local/share/applications/
+# Prune orphaned copies
+bash $OMARCHY_PATH/install/post-install/prune-desktops.sh
 
-# Refresh the webapps
-bash $OMARCHY_PATH/install/packaging/icons.sh
-bash $OMARCHY_PATH/install/packaging/webapps.sh
+# Refresh the webapps only if user wants webapps
+if gum confirm "Refresh (reinstall) all Omarchy webapps?"; then
+  bash $OMARCHY_PATH/install/packaging/icons.sh
+  bash $OMARCHY_PATH/install/packaging/webapps.sh
+fi
 
 update-desktop-database ~/.local/share/applications
