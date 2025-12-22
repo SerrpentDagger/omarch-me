@@ -338,6 +338,7 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id="Bitwarden"
 
     block-out-from "screen-capture"
 
@@ -357,6 +358,7 @@ window-rule {
 // Big floating for omarchy TUIs.
 window-rule {
   match app-id="org.omarchy.terminal"
+  match app-id="Bitwarden"
 
   open-floating true
   default-column-width { proportion 0.75; }
