@@ -345,9 +345,10 @@ window-rule {
     // block-out-from "screencast"
 }
 
-// Example: Open localsend as a sharey floating window.
+// Example: Open localsend and authenticator as small floating windows.
 window-rule {
   match app-id="localsend"
+  match app-id=r#".*Authenticator$"#
 
   open-floating true
   default-column-width { proportion 0.3; }
