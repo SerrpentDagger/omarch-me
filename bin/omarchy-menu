@@ -28,7 +28,7 @@ else
   learn_link='https://wiki.hypr.land/'
   learn_keys='omarchy-menu-keybindings'
   capture_screenshot='show_screenshot_menu'
-  case_match='Niri'
+  case_match='Hyprland'
   hyprsunset_display='  Hyprsunset\n'
   screensaver_display='󱄄  Screensaver\n'
   nightlight_display='󰔎  Nightlight\n'
@@ -174,7 +174,7 @@ show_toggle_menu() {
 }
 
 show_style_menu() {
-  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n$comp_display$screensaver_display\n  About") in
+  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n$comp_display$screensaver_display  About") in
   *Theme*) show_theme_menu ;;
   *Font*) show_font_menu ;;
   *Background*) omarchy-theme-bg-next ;;
