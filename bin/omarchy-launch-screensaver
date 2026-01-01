@@ -16,37 +16,65 @@ fi
 # Silently quit Walker on overlay
 walker -q
 
-focused=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')
+niri_output_pattern='^Output.*\(\K[^\)]+'
+is_niri() {
+  pgrep -x niri > /dev/null
+}
+
+get_monitors() {
+  if is_niri; then
+    niri msg outputs | grep -oP "$niri_output_pattern"
+  else
+    hyprctl monitors -j | jq -r '.[] | .name'
+  fi
+}
+
+focus_monitor() {
+  if is_niri; then
+    niri msg action focus-monitor $1
+  else
+    hyprctl dispatch focusmonitor $1
+  fi
+}
+
+if is_niri; then
+  focused=$(niri msg focused-output | grep -oP "$niri_output_pattern")
+else
+  focused=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')
+fi
 terminal=$(xdg-terminal-exec --print-id)
 
-for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
-  hyprctl dispatch focusmonitor $m
+for m in $(get_monitors); do
+  focus_monitor $m
 
   case $terminal in
   *Alacritty*)
-    hyprctl dispatch exec -- \
-      alacritty --class=org.omarchy.screensaver \
+    spawned_cmd='alacritty --class=org.omarchy.screensaver \
       --config-file ~/.local/share/omarchy/default/alacritty/screensaver.toml \
-      -e omarchy-cmd-screensaver
+      -e omarchy-cmd-screensaver'
     ;;
   *ghostty*)
-    hyprctl dispatch exec -- \
-      ghostty --class=org.omarchy.screensaver \
+    spawned_cmd='ghostty --class=org.omarchy.screensaver \
       --config-file=~/.local/share/omarchy/default/ghostty/screensaver \
       --font-size=18 \
-      -e omarchy-cmd-screensaver
+      -e omarchy-cmd-screensaver'
     ;;
   *kitty*)
-    hyprctl dispatch exec -- \
-      kitty --class=org.omarchy.screensaver \
+    spawned_cmd='kitty --class=org.omarchy.screensaver \
       --override font_size=18 \
       --override window_padding_width=0 \
-      -e omarchy-cmd-screensaver
+      -e omarchy-cmd-screensaver'
     ;;
   *)
+    spawned_cmd='exit 1'
     notify-send "✋  Screensaver only runs in Alacritty, Ghostty, or Kitty"
     ;;
   esac
+  if is_niri; then
+    niri msg action spawn-sh -- "$spawned_cmd"
+  else
+    hyprctl dispatch exec -- $spawned_cmd
+  fi
 done
 
-hyprctl dispatch focusmonitor $focused
+focus_monitor $focused

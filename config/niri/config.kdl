@@ -348,22 +348,22 @@ window-rule {
 
 // Example: Open localsend and authenticator as small floating windows.
 window-rule {
-  match app-id="localsend"
-  match app-id=r#".*Authenticator$"#
+    match app-id="localsend"
+    match app-id=r#".*Authenticator$"#
 
-  open-floating true
-  default-column-width { proportion 0.3; }
-  default-window-height { proportion 0.7; }
+    open-floating true
+    default-column-width { proportion 0.3; }
+    default-window-height { proportion 0.7; }
 }
 
 // Big floating for omarchy TUIs.
 window-rule {
-  match app-id="org.omarchy.terminal"
-  match app-id="Bitwarden"
+    match app-id="org.omarchy.terminal"
+    match app-id="Bitwarden"
 
-  open-floating true
-  default-column-width { proportion 0.75; }
-  default-window-height { proportion 0.8; }
+    open-floating true
+    default-column-width { proportion 0.75; }
+    default-window-height { proportion 0.8; }
 }
 
 window-rule {
@@ -375,6 +375,13 @@ window-rule {
     open-maximized true
 }
 
+window-rule {
+    // Windows to open fullscreen
+    match app-id="org.omarchy.screensaver"
+    
+    open-fullscreen true
+}
+
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
@@ -383,16 +390,16 @@ window-rule {
 }
 
 window-rule {
-  // Windows not to be translucent. Add as desired.
-  exclude app-id="gimp"
+    // Windows not to be translucent. Add as desired.
+    exclude app-id="gimp"
 
-  opacity 0.87
+    opacity 0.87
 }
 
 window-rule {
-  match is-focused=false
+    match is-focused=false
   
-  opacity 0.8
+    opacity 0.8
 }
 
 binds {
@@ -694,20 +701,20 @@ binds {
 }
 
 environment {
-  GUM_CONFIRM_PROMPT_FOREGROUND "6"
-  GUM_CONFIRM_SELECTED_FOREGROUND "0"
-  GUM_CONFIRM_UNSELECTED_FOREGROUND "0"
-  GUM_CONFIRM_SELECTED_BACKGROUND "2"
-  GUM_CONFIRM_UNSELECTED_BACKGROUND "8"
+    GUM_CONFIRM_PROMPT_FOREGROUND "6"
+    GUM_CONFIRM_SELECTED_FOREGROUND "0"
+    GUM_CONFIRM_UNSELECTED_FOREGROUND "0"
+    GUM_CONFIRM_SELECTED_BACKGROUND "2"
+    GUM_CONFIRM_UNSELECTED_BACKGROUND "8"
 
-  QT_STYLE_OVERRIDE "kvantum"
-  SDL_VIDEODRIVER "wayland"
-  MOZ_ENABLE_WAYLAND "1"
-  ELECTRON_OZONE_PLATFORM_HINT "wayland"
-  OZONE_PLATFORM "wayland"
-  XDG_SESSION_TYPE "wayland"
+    QT_STYLE_OVERRIDE "kvantum"
+    SDL_VIDEODRIVER "wayland"
+    MOZ_ENABLE_WAYLAND "1"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    OZONE_PLATFORM "wayland"
+    XDG_SESSION_TYPE "wayland"
   
-  XCOMPOSEFILE "~/.XCompose"
+    XCOMPOSEFILE "~/.XCompose"
 }
 
 //spawn-sh-at-startup "uwsm finalize"

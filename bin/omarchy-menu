@@ -15,7 +15,7 @@ if pgrep -x niri > /dev/null; then
   monitor_config="$key_config"
   comp_config="$key_config"
   hyprsunset_display=''
-  screensaver_display=''
+  screensaver_display='󱄄  Screensaver\n'
   nightlight_display=''
 else
   is_niri=false

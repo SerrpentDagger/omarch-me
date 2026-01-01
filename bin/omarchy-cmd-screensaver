@@ -1,11 +1,19 @@
 #!/bin/bash
 
+is_niri() {
+  pgrep -x niri > /dev/null
+}
+
 screensaver_in_focus() {
-  hyprctl activewindow -j | jq -e '.class == "org.omarchy.screensaver"' >/dev/null 2>&1
+  if is_niri; then
+    niri msg focused-window | grep -P "\w*App ID.*org\.omarchy\.screensaver" >/dev/null 2>&1
+  else
+    hyprctl activewindow -j | jq -e '.class == "org.omarchy.screensaver"' >/dev/null 2>&1
+  fi
 }
 
 exit_screensaver() {
-  hyprctl keyword cursor:invisible false
+  is_niri || hyprctl keyword cursor:invisible false
   pkill -x tte 2>/dev/null
   pkill -f org.omarchy.screensaver 2>/dev/null
   exit 0
@@ -18,7 +26,7 @@ while read -rsn1 -t 0.1; do :; done # Flush any pending input
 
 printf '\033]11;rgb:00/00/00\007'  # Set background color to black
 
-hyprctl keyword cursor:invisible true &>/dev/null
+is_niri || hyprctl keyword cursor:invisible true &>/dev/null
 
 tty=$(tty 2>/dev/null)
 
