@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage: omarch-me-set-compositor <hyprland|niri>"
+  exit 1
+fi
+
+comp_name=$1
+
+prep_niri() {
+  if ! niri --version > /dev/null; then
+    notify-send "󰗢    Installing Niri"
+    sudo pacman -Syu --noconfirm --needed niri
+  fi
+}
+
+case $comp_name in
+hyprland) sudo sed -i 's/Session=niri-uwsm/Session=hyprland-uwsm/g' /etc/sddm.conf.d/autologin.conf && notify-send "    Switched to Hyprland (on reboot)" ;;
+niri) prep_niri && sudo sed -i 's/Session=hyprland-uwsm/Session=niri-uwsm/g' /etc/sddm.conf.d/autologin.conf && notify-send "󰗢    Switched to Niri (on reboot)" ;;
+*) echo "Unrecognised compositor $comp_name" && exit 1 ;;
+esac

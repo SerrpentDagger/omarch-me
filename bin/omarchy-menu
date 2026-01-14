@@ -174,11 +174,12 @@ show_toggle_menu() {
 }
 
 show_style_menu() {
-  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n$comp_display$screensaver_display  About") in
+  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n$comp_display󰐯  Compositor\n$screensaver_display  About") in
   *Theme*) show_theme_menu ;;
   *Font*) show_font_menu ;;
   *Background*) omarchy-theme-bg-next ;;
   *"$case_match"*) open_in_editor "$lnf_config" ;;
+  *Compositor*) show_compositor_menu ;;
   *Screensaver*) open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
   *About*) open_in_editor ~/.config/omarchy/branding/about.txt ;;
   *) show_main_menu ;;
@@ -196,6 +197,14 @@ show_font_menu() {
   else
     omarchy-font-set "$theme"
   fi
+}
+
+show_compositor_menu() {
+  case $(menu "Compositor" "  Hyprland\n󰗢  Niri") in
+  *Hyprland*) present_terminal "omarch-me-set-compositor hyprland" ;;
+  *Niri*) present_terminal "omarch-me-set-compositor niri" ;;
+  *) back_to show_style_menu ;;
+  esac
 }
 
 show_setup_menu() {

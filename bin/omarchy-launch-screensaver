@@ -49,21 +49,21 @@ for m in $(get_monitors); do
 
   case $terminal in
   *Alacritty*)
-    spawned_cmd='alacritty --class=org.omarchy.screensaver \
+    spawned_cmd="alacritty --class=org.omarchy.screensaver \
       --config-file ~/.local/share/omarchy/default/alacritty/screensaver.toml \
-      -e omarchy-cmd-screensaver'
+      -e omarchy-cmd-screensaver"
     ;;
   *ghostty*)
-    spawned_cmd='ghostty --class=org.omarchy.screensaver \
+    spawned_cmd="ghostty --class=org.omarchy.screensaver \
       --config-file=~/.local/share/omarchy/default/ghostty/screensaver \
       --font-size=18 \
-      -e omarchy-cmd-screensaver'
+      -e omarchy-cmd-screensaver"
     ;;
   *kitty*)
-    spawned_cmd='kitty --class=org.omarchy.screensaver \
+    spawned_cmd="kitty --class=org.omarchy.screensaver \
       --override font_size=18 \
       --override window_padding_width=0 \
-      -e omarchy-cmd-screensaver'
+      -e omarchy-cmd-screensaver"
     ;;
   *)
     spawned_cmd='exit 1'
