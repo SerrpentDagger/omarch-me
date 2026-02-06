@@ -15,7 +15,7 @@ if pgrep -x niri > /dev/null; then
   monitor_config="$key_config"
   comp_config="$key_config"
   hyprsunset_display=''
-  screensaver_display=''
+  screensaver_display='󱄄  Screensaver\n'
   nightlight_display=''
 else
   is_niri=false
@@ -28,7 +28,7 @@ else
   learn_link='https://wiki.hypr.land/'
   learn_keys='omarchy-menu-keybindings'
   capture_screenshot='show_screenshot_menu'
-  case_match='Niri'
+  case_match='Hyprland'
   hyprsunset_display='  Hyprsunset\n'
   screensaver_display='󱄄  Screensaver\n'
   nightlight_display='󰔎  Nightlight\n'
@@ -174,11 +174,12 @@ show_toggle_menu() {
 }
 
 show_style_menu() {
-  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n$comp_display$screensaver_display\n  About") in
+  case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n$comp_display󰐯  Compositor\n$screensaver_display  About") in
   *Theme*) show_theme_menu ;;
   *Font*) show_font_menu ;;
   *Background*) omarchy-theme-bg-next ;;
   *"$case_match"*) open_in_editor "$lnf_config" ;;
+  *Compositor*) show_compositor_menu ;;
   *Screensaver*) open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
   *About*) open_in_editor ~/.config/omarchy/branding/about.txt ;;
   *) show_main_menu ;;
@@ -196,6 +197,14 @@ show_font_menu() {
   else
     omarchy-font-set "$theme"
   fi
+}
+
+show_compositor_menu() {
+  case $(menu "Compositor" "  Hyprland\n󰗢  Niri") in
+  *Hyprland*) present_terminal "omarch-me-set-compositor hyprland" ;;
+  *Niri*) present_terminal "omarch-me-set-compositor niri" ;;
+  *) back_to show_style_menu ;;
+  esac
 }
 
 show_setup_menu() {
