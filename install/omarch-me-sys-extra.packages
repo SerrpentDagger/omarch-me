@@ -25,6 +25,9 @@ omarchy-chromium
 # Input
 # input-remapper
 
+# AI help, incl. about system.
+opencode
+
 # Theming
 aether
 

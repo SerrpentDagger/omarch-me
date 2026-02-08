@@ -1,6 +1,7 @@
 echo "Add opencode with system themeing"
 
-omarchy-pkg-add opencode
+# SD: opencode should be optional. Moved back to install AI menu, but keep configs in case installed later.
+# omarchy-pkg-add opencode
 
 # Add config using omarchy theme by default
 if [[ ! -f ~/.config/opencode/opencode.json ]]; then
