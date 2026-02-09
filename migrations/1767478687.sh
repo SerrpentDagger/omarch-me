@@ -1,4 +1,4 @@
-echo "Add opencode with system themeing"
+echo "Add opencode's system themeing, in case it's installed now or later."
 
 # SD: opencode should be optional. Moved back to install AI menu, but keep configs in case installed later.
 # omarchy-pkg-add opencode
