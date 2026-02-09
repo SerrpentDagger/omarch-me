@@ -591,9 +591,9 @@ show_update_password_menu() {
 
 show_system_menu() {
   local options="  Lock\n$screensaver_display"
-  [ -f ~/.local/state/omarchy/toggles/suspend-on ] && options="$options\n󰒲  Suspend"
-  omarchy-hibernation-available && options="$options\n󰤁  Hibernate"
-  options="$options\n󰜉  Restart\n󰐥  Shutdown"
+  [ -f ~/.local/state/omarchy/toggles/suspend-on ] && options="$options󰒲  Suspend\n"
+  omarchy-hibernation-available && options="$options󰤁  Hibernate\n"
+  options="$options󰜉  Restart\n󰐥  Shutdown"
 
   case $(menu "System" "$options") in
   *Lock*) omarchy-lock-screen ;;
