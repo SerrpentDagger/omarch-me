@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Ensure all default .desktop, web apps, and TUIs are installed.
+
 # Copy and sync icon files
 mkdir -p ~/.local/share/icons/hicolor/48x48/apps/
 cp ~/.local/share/omarchy/applications/icons/*.png ~/.local/share/icons/hicolor/48x48/apps/
@@ -12,10 +14,8 @@ cp ~/.local/share/omarchy/applications/hidden/*.desktop ~/.local/share/applicati
 # Prune orphaned copies
 bash $OMARCHY_PATH/install/post-install/prune-desktops.sh
 
-# Refresh the webapps only if user wants webapps
-if gum confirm "Refresh (reinstall) all Omarchy webapps?"; then
-  bash $OMARCHY_PATH/install/packaging/icons.sh
-  bash $OMARCHY_PATH/install/packaging/webapps.sh
-fi
+# Refresh app icons and TUIs.
+bash $OMARCHY_PATH/install/packaging/icons.sh
+bash $OMARCHY_PATH/install/packaging/tuis.sh
 
 update-desktop-database ~/.local/share/applications

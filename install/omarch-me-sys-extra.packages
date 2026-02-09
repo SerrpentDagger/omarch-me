@@ -3,6 +3,7 @@
 
 # Passwords
 keepassxc
+authenticator
 
 # Calculators
 libqalculate
@@ -10,10 +11,22 @@ libqalculate
 # Doc viewers
 evince
 
+# Virtual machines
+virt-manager
+
+# Database viewer
+sqlitebrowser
+
 # Browsers
 #mullvad-browser
 #brave
 omarchy-chromium
+
+# Input
+# input-remapper
+
+# AI help, incl. about system.
+opencode
 
 # Theming
 aether
