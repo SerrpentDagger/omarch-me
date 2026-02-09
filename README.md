@@ -28,17 +28,17 @@ Niri for Omarchy is now a functional feature in the `master` branch. Note that c
 - `Trigger->Screenshot` uses Niri screenshot tool
 - `hyprpicker` color picker
 - Screen record can get webcam scale from Niri
+- Screensaver
 
 What *isn't* ready yet:
 
 - Hyprsunset nightlight (try `sunsetr` from AUR? [May be implemented upstream](https://github.com/basecamp/omarchy/pull/4173))
-- Screensaver (in `testing` branch now)
 - Certain quality-of-life scripts
 - Complete modular Niri configuration.
 
 To use Niri on Omarchy, simply select `niri` from the *Extra System* packages during customised install. The installer will then detect its presence and react accordingly. Themes, menus and keybinds included!
 
-Note that Hyprland is still installed alongside Niri, and you can switch back to it later by changing the session entry in `/etc/sddm.conf.d/autologin.conf` from `niri-uwsm` to `hyprland-uwsm`. You will then be logged in to the Hyprland session upon next restart. I expect to provide this as a menu entry later (in `testing` now).
+Note that Hyprland is still installed alongside Niri, and you can switch back and forth between the two in the `Style→Compositor` menu.
 
 ## Installation
 Installation of Omarch-me takes the form of a [manual Omarchy install](https://learn.omacom.io/2/the-omarchy-manual/96/manual-installation) using a different `curl` install script after Arch. In partular...
