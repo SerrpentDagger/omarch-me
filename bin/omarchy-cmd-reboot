@@ -4,4 +4,4 @@
 # This is particularly helpful for applications like Chromium that otherwise won't shutdown cleanly.
 
 omarchy-hyprland-window-close-all &
-omarchy-launch-floating-terminal-with-presentation --no-done omarchy-cmd-pre-shutdown reboot
+omarchy-launch-floating-terminal-with-presentation --no-done omarchy-cmd-shutdown-perform reboot
