@@ -3,7 +3,7 @@
 # Close all open windows
 if omarch-me-is-niri; then
   for w in $(niri msg windows | grep -Po "Window ID \K\d+"); do
-    niri msg action close-window --id $w
+    niri msg action close-window --id $w &
   done
 else
   hyprctl clients -j | \
