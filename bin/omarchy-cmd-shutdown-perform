@@ -25,7 +25,12 @@ get-open-windows() {
 }
 
 focus-tui() {
-  hyprctl dispatch focuswindow "class:org.omarch-me.shutdown-tui" >/dev/null 2>&1
+  if omarch-me-is-niri; then
+    shutdown_id=$(niri msg windows | grep -m 1 -B 2 "org.omarch-me.shutdown-tui" | grep -Po "Window ID \K\d+")
+    niri msg action focus-window --id $shutdown_id
+  else
+    hyprctl dispatch focuswindow "class:org.omarch-me.shutdown-tui" >/dev/null 2>&1
+  fi
 }
 
 draw-open-windows() {

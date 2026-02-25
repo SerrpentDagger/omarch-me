@@ -22,7 +22,7 @@ input {
             // For example:
             // layout "us,ru"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
-            
+
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
@@ -366,6 +366,15 @@ window-rule {
     default-window-height { proportion 0.8; }
 }
 
+// Smaller floating for shutdown-tui.
+window-rule {
+    match app-id="org.omarch-me.shutdown-tui"
+
+    open-floating true
+    default-column-width { proportion 0.6; }
+    default-window-height { proportion 0.7; }
+}
+
 window-rule {
     // Windows to open maximised. Add as desired.
     // Run "niri msg windows" to get a list of window identities.
@@ -378,7 +387,7 @@ window-rule {
 window-rule {
     // Windows to open fullscreen
     match app-id="org.omarchy.screensaver"
-    
+
     open-fullscreen true
 }
 
@@ -398,7 +407,7 @@ window-rule {
 
 window-rule {
     match is-focused=false
-  
+
     opacity 0.8
 }
 
@@ -425,10 +434,10 @@ binds {
     Super+Shift+Alt+B hotkey-overlay-title=null { spawn-sh "omarchy-launch-browser --private"; }
     Super+Shift+N hotkey-overlay-title="Editor" { spawn "omarchy-launch-editor"; }
     Super+Shift+T hotkey-overlay-title="Activity Monitor" { spawn-sh "omarchy-launch-tui btop"; }
-    
+
     Super+Space hotkey-overlay-title="App Launcher" { spawn "omarchy-launch-walker"; }
     Super+Alt+Space hotkey-overlay-title="Omarchy Menu" { spawn "omarchy-menu"; }
-    
+
     // Utility bindings from Omarchy
     Super+Ctrl+E hotkey-overlay-title=null { spawn-sh "omarchy-launch-walker -m symbols"; }
     Super+Escape hotkey-overlay-title=null { spawn-sh "omarchy-menu system"; }
@@ -706,7 +715,7 @@ environment {
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
     OZONE_PLATFORM "wayland"
     XDG_SESSION_TYPE "wayland"
-  
+
     XCOMPOSEFILE "~/.XCompose"
 }
 
