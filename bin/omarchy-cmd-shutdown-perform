@@ -24,6 +24,10 @@ get-open-windows() {
   fi
 }
 
+focus-tui() {
+  hyprctl dispatch focuswindow "class:org.omarch-me.shutdown-tui" >/dev/null 2>&1
+}
+
 draw-open-windows() {
   tput sc
 
@@ -94,6 +98,7 @@ timer_tick() {
 
 # Periodically update list of windows
 while [ $time_left -gt 0 ]; do
+  focus-tui
   get-open-windows
   draw-open-windows
 

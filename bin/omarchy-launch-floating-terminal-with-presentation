@@ -5,10 +5,16 @@
 
 # Allow for the '--no-done' flag to avoid finishing with omarchy-show-done
 no_done=0
+tui_class="org.omarchy.terminal"
 if [[ "--no-done" == "$1" ]]; then
   no_done=1
   shift
 fi
+# Allow for the '--tui-class <name>' flag for custom compositor-level styling
+if [[ "--tui-class" == "$1" ]]; then
+  tui_class="$2"
+  shift 2
+fi
 
 cmd="$*"
-exec setsid uwsm-app -- xdg-terminal-exec --app-id=org.omarchy.terminal --title=Omarchy -e bash -c "omarchy-show-logo; $cmd; if [ \$? -ne 130 ] && [ $no_done -eq 0 ]; then omarchy-show-done; fi"
+exec setsid uwsm-app -- xdg-terminal-exec --app-id="$tui_class" --title=Omarchy -e bash -c "omarchy-show-logo; $cmd; if [ \$? -ne 130 ] && [ $no_done -eq 0 ]; then omarchy-show-done; fi"
