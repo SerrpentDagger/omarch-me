@@ -1,3 +1,6 @@
+# NOT IN DEVELOPMENT
+After getting this stuff working in VMs, I discovered that Omarchy doesn't play nicely with my hardware. I'm not fond of hardware configuration, so I switched to Cachy OS with a custom Niri/Noctalia configuration. I think this worked out much better than trying to wrangle Omarchy into something it isn't designed for, so that's become the successor of this project.
+
 # Omarch-me
 Omarch-me is a fork of [Omarchy](https://omarchy.org) by DHH: "a beautiful, modern & opinionated Linux distribution". This fork makes minor modifications to the install scripts that prioritise open-source apps and allow you to choose yourself which default apps to install with the OS.
 
@@ -61,7 +64,8 @@ Then follow the prompts as you wish.
 ![custom apps image](https://serpentdagger.com/assets/images/content/om-empty-menus.png)
 
 ## The Future
-Updates to Omarchy scripts will be vetted and merged from upstream according to the principles:
+~~Updates to Omarchy scripts will be vetted and merged from upstream according to the principles:~~
+See beginning of file.
 
 - There will always be an open-source option available;
 - It's your computer, and you decide what will run on it.
